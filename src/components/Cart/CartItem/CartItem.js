@@ -12,6 +12,12 @@ import useStyles from './styles';
 const CartItem = ({ item, onUpdateQuantity, onRemoveProductFromCart }) => {
   const classes = useStyles();
 
+  const handleUpdateCartQty = (lineItemId, newQuantity) =>
+    onUpdateQuantity(lineItemId, newQuantity);
+
+  const handleRemoveFromCart = (lineItemId) =>
+    onRemoveProductFromCart(lineItemId);
+
   return (
     <Card className='cart-item'>
       <CardMedia
@@ -30,7 +36,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemoveProductFromCart }) => {
           <Button
             type='button'
             size='small'
-            onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+            onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}
           >
             -
           </Button>
@@ -38,7 +44,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemoveProductFromCart }) => {
           <Button
             type='button'
             size='small'
-            onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+            onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
           >
             +
           </Button>
@@ -47,7 +53,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemoveProductFromCart }) => {
           variant='contained'
           type='button'
           color='secondary'
-          onClick={() => onRemoveProductFromCart(item.id)}
+          onClick={() => handleRemoveFromCart(item.id)}
         >
           Remove
         </Button>
